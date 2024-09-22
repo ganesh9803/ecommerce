@@ -24,7 +24,7 @@ const initializeDbAndServer = async () => {
       driver: sqlite3.Database,
     });
 
-    app.listen(3000, () =>
+    app.listen(process.env.PORT ||3000, () =>
       console.log('Server Running at http://localhost:3000/'),
     );
   } catch (error) {
@@ -103,7 +103,7 @@ app.post('/login_token', async (request, response) => {
     const isPasswordMatched = await bcrypt.compare(password, dbUser.password);
     if (isPasswordMatched) {
       const payload = { username };
-      const jwtToken = jwt.sign(payload, 'MY_SECRET_TOKEN', {expiresIn: '2h'});
+      const jwtToken = jwt.sign(payload, 'MY_SECRET_TOKEN');
       response.send({ jwt_token: jwtToken });
     } else {
       response.status(400).send({ error_msg: 'Invalid Password' });

@@ -4,7 +4,6 @@ import './index.css';
 import withRouter from '../withRouter'; // Import the withRouter component
 import { Link, Navigate } from 'react-router-dom';
 
-
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -37,7 +36,7 @@ class Login extends Component {
     event.preventDefault();
     const { username, password } = this.state;
     const userDetails = { username, password };
-    const url = 'http://localhost:3000/login_token'
+    const url = 'http://localhost:3000/login_token'; 
     const options = {
       method: 'POST',
       headers: {
@@ -60,9 +59,9 @@ class Login extends Component {
   };
 
   render() {
-    const jwtToken = Cookies.get('jwt_token')
+    const jwtToken = Cookies.get('jwt_token');
     if (jwtToken !== undefined) {
-      return <Navigate to ="/" />
+      return <Navigate to="/" />;
     }
     const { showSubmitError, errorMsg } = this.state;
     return (
@@ -111,7 +110,10 @@ class Login extends Component {
             Login
           </button>
           {showSubmitError && <p className="error-message">*{errorMsg}</p>}
-          <Link to="/signup"> <p style={{ color: 'green', fontFamily: 'Roboto', fontstyle:'oblique' }}>Create Account</p>
+          <Link to="/signup">
+            <p style={{ color: 'green', fontFamily: 'Roboto', fontstyle: 'oblique' }}>
+              Create Account
+            </p>
           </Link>
         </form>
       </div>
